@@ -1,197 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tamdan Smart Warehouse - 8-Month Roadmap (All Features & Priorities)</title>
+  <title>Tamdan Smart Warehouse — Master Roadmap</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
-      darkMode: 'class'
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
     }
   </script>
   <style>
     :root {
-      --background: #f8fafc;
-      --foreground: #0f172a;
+      --bg: #f8fafc;
       --card: #ffffff;
       --border: #e2e8f0;
-      --muted-foreground: #64748b;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --row-hover: #f1f5f9;
+      --grid-line: #f1f5f9;
     }
     .dark {
-      --background: #090d16;
-      --foreground: #f1f5f9;
-      --card: #111827;
-      --border: #1f2937;
-      --muted-foreground: #94a3b8;
+      --bg: #090d16;
+      --card: #0f172a;
+      --border: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --row-hover: #172033;
+      --grid-line: #172033;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
     }
     ::-webkit-scrollbar {
-      height: 8px;
-      width: 8px;
+      height: 7px;
+      width: 7px;
     }
     ::-webkit-scrollbar-track {
-      background: var(--card, rgba(0,0,0,0.05));
-      border-radius: 4px;
+      background: transparent;
     }
     ::-webkit-scrollbar-thumb {
-      background: var(--border, rgba(150,150,150,0.3));
-      border-radius: 4px;
+      background: var(--border);
+      border-radius: 9999px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: var(--muted-foreground, rgba(150,150,150,0.6));
+      background: var(--text-muted);
+    }
+    .sticky-column {
+      position: sticky;
+      left: 0;
+      z-index: 10;
+      background-color: var(--card);
+    }
+    .today-line {
+      left: 0%; /* Sep 08 in 8-month timeline */
     }
   </style>
 </head>
-<body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-4 md:p-6 select-none font-sans min-h-screen transition-colors duration-200">
-  <div class="max-w-7xl mx-auto space-y-6">
+<body class="antialiased p-4 md:p-6 min-h-screen">
+  <div class="max-w-[1600px] mx-auto space-y-5">
 
-    <!-- Header Card -->
-    <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm">
+    <!-- Top Navigation & Stats Bar -->
+    <header class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-5 shadow-xs">
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">Started: May 07, 2026</span>
-            <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">Today: Sep 08, 2026</span>
-            <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">Launch: Dec 28, 2026</span>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span class="text-xs font-mono font-medium text-[var(--text-muted)]">Tamdan Warehouse Platform</span>
           </div>
-          <h1 class="text-2xl font-bold mt-2 text-[var(--foreground,#0f172a)] tracking-tight">Tamdan Smart Warehouse — Master Roadmap</h1>
-          <p class="text-sm text-[var(--muted-foreground,#64748b)] mt-1">299 Completed Updates + The 11 Next Product Priorities (Reports, Dashboard, Khmer, Billing, Settings)</p>
+          <h1 class="text-xl md:text-2xl font-bold tracking-tight text-[var(--text)] mt-1">Product & Engineering Roadmap</h1>
         </div>
-        
-        <!-- Summary Stats -->
-        <div class="flex items-center gap-2.5 flex-wrap">
-          <div class="text-center px-3.5 py-2 bg-[var(--background,rgba(0,0,0,0.03))] border border-[var(--border,#e2e8f0)] rounded-xl">
-            <div class="text-[10px] text-[var(--muted-foreground,#64748b)] uppercase font-semibold">Total Milestones</div>
-            <div class="text-lg font-bold text-[var(--foreground,#0f172a)]">26</div>
+
+        <!-- Metric Badges -->
+        <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+          <div class="px-3.5 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-xl text-center">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Total Scope</div>
+            <div class="text-base font-bold font-mono text-[var(--text)]">26 Features</div>
           </div>
-          <div class="text-center px-3.5 py-2 bg-[var(--background,rgba(0,0,0,0.03))] border border-[var(--border,#e2e8f0)] rounded-xl">
-            <div class="text-[10px] text-[var(--muted-foreground,#64748b)] uppercase font-semibold">Completed</div>
-            <div class="text-lg font-bold text-emerald-600 dark:text-emerald-400">15 Delivered</div>
+          <div class="px-3.5 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-xl text-center">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Delivered</div>
+            <div class="text-base font-bold font-mono text-emerald-500">15 Completed</div>
           </div>
-          <div class="text-center px-3.5 py-2 bg-[var(--background,rgba(0,0,0,0.03))] border border-[var(--border,#e2e8f0)] rounded-xl">
-            <div class="text-[10px] text-[var(--muted-foreground,#64748b)] uppercase font-semibold">New Priorities</div>
-            <div class="text-lg font-bold text-blue-600 dark:text-blue-400">11 Added</div>
+          <div class="px-3.5 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-xl text-center">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">In Progress</div>
+            <div class="text-base font-bold font-mono text-blue-500">1 Active</div>
           </div>
-          <div class="text-center px-3.5 py-2 bg-[var(--background,rgba(0,0,0,0.03))] border border-[var(--border,#e2e8f0)] rounded-xl">
-            <div class="text-[10px] text-[var(--muted-foreground,#64748b)] uppercase font-semibold">Progress to Launch</div>
-            <div class="text-lg font-bold text-indigo-600 dark:text-indigo-400">62%</div>
+          <div class="px-3.5 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-xl text-center">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Upcoming</div>
+            <div class="text-base font-bold font-mono text-slate-400">10 Backlog</div>
           </div>
         </div>
       </div>
 
-      <!-- Controls & Filters -->
-      <div class="mt-6 pt-5 border-t border-[var(--border,#e2e8f0)] flex flex-wrap items-center justify-between gap-3">
-        <!-- Layer Filter (Frontend / Backend / Fullstack) -->
-        <div class="flex flex-wrap items-center gap-1.5" id="layer-filters">
-          <span class="text-xs font-semibold text-[var(--muted-foreground,#64748b)] mr-1">Layer:</span>
-          <button onclick="setLayer('all')" class="layer-btn px-2.5 py-1 text-xs font-medium rounded-lg bg-blue-600 text-white shadow-xs transition" data-layer="all">All Layers</button>
-          <button onclick="setLayer('frontend')" class="layer-btn px-2.5 py-1 text-xs font-medium rounded-lg bg-[var(--card,#ffffff)] text-sky-600 border border-[var(--border,#e2e8f0)] hover:bg-[var(--border,#e2e8f0)] transition" data-layer="frontend">🖥️ Frontend</button>
-          <button onclick="setLayer('backend')" class="layer-btn px-2.5 py-1 text-xs font-medium rounded-lg bg-[var(--card,#ffffff)] text-purple-600 border border-[var(--border,#e2e8f0)] hover:bg-[var(--border,#e2e8f0)] transition" data-layer="backend">⚙️ Backend</button>
-          <button onclick="setLayer('fullstack')" class="layer-btn px-2.5 py-1 text-xs font-medium rounded-lg bg-[var(--card,#ffffff)] text-emerald-600 border border-[var(--border,#e2e8f0)] hover:bg-[var(--border,#e2e8f0)] transition" data-layer="fullstack">🔄 Fullstack</button>
+      <!-- Filters & Controls -->
+      <div class="mt-4 pt-4 border-t border-[var(--border)] flex flex-wrap items-center justify-between gap-3">
+        <!-- Layer Filters -->
+        <div class="flex items-center gap-1.5 p-1 bg-[var(--bg)] border border-[var(--border)] rounded-xl">
+          <button onclick="setLayer('all')" class="layer-btn px-3 py-1 text-xs font-medium rounded-lg bg-blue-600 text-white transition" data-layer="all">All Layers</button>
+          <button onclick="setLayer('frontend')" class="layer-btn px-3 py-1 text-xs font-medium rounded-lg text-[var(--text-muted)] hover:text-[var(--text)] transition" data-layer="frontend">Frontend</button>
+          <button onclick="setLayer('backend')" class="layer-btn px-3 py-1 text-xs font-medium rounded-lg text-[var(--text-muted)] hover:text-[var(--text)] transition" data-layer="backend">Backend</button>
+          <button onclick="setLayer('fullstack')" class="layer-btn px-3 py-1 text-xs font-medium rounded-lg text-[var(--text-muted)] hover:text-[var(--text)] transition" data-layer="fullstack">Fullstack</button>
         </div>
 
-        <!-- Search & Status Filter -->
+        <!-- Search & Settings -->
         <div class="flex items-center gap-2">
-          <select id="status-filter" onchange="renderGantt()" class="text-xs bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded-lg px-2.5 py-1.5 outline-none">
-            <option value="all">All Stages</option>
-            <option value="done">Completed</option>
-            <option value="active">Active Work (Sep)</option>
-            <option value="planned">Upcoming (Oct – Dec)</option>
+          <select id="status-filter" onchange="renderGantt()" class="text-xs bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] rounded-xl px-3 py-2 outline-none font-medium">
+            <option value="all">All Statuses</option>
+            <option value="done">Delivered</option>
+            <option value="active">Active Sprint</option>
+            <option value="planned">Planned</option>
           </select>
-          <input type="text" id="search-input" onkeyup="renderGantt()" placeholder="Search any feature..." class="text-xs bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded-lg px-3 py-1.5 w-48 outline-none focus:border-blue-500">
-          <button onclick="toggleTheme()" id="theme-btn" title="Toggle Dark/Light Mode" class="p-1.5 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--border)] text-[var(--foreground)] transition text-xs flex items-center justify-center">
+          <input type="text" id="search-input" oninput="renderGantt()" placeholder="Search features, modules, API..." class="text-xs bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] rounded-xl px-3 py-2 w-48 sm:w-60 outline-none focus:border-blue-500">
+          <button onclick="toggleTheme()" class="p-2 rounded-xl border border-[var(--border)] bg-[var(--bg)] hover:bg-[var(--border)] text-[var(--text)] transition text-xs" title="Toggle theme">
             <span id="theme-icon">🌙</span>
           </button>
         </div>
       </div>
-    </div>
+    </header>
 
-    <!-- Timeline Gantt Container -->
-    <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl shadow-sm overflow-hidden flex flex-col">
+    <!-- Gantt Chart Container -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-xs overflow-hidden">
       <div class="overflow-x-auto" id="gantt-scroll-container">
-        <div class="min-w-[1300px]">
-          
-          <!-- Timeline Header (Months & Time Grid) -->
-          <div class="border-b border-[var(--border,#e2e8f0)] bg-[var(--background,rgba(0,0,0,0.02))] select-none">
-            <!-- Months Row (8 Months) -->
-            <div class="flex text-xs font-semibold text-[var(--muted-foreground,#64748b)] border-b border-[var(--border,#e2e8f0)]">
-              <div class="w-80 flex-shrink-0 p-2.5 border-r border-[var(--border,#e2e8f0)]">Feature & Layer</div>
-              <div class="flex-1 grid grid-cols-8 text-center divide-x divide-[var(--border,#e2e8f0)]">
-                <div class="p-2 bg-emerald-50/30 dark:bg-emerald-950/10">May '26 (Done)</div>
-                <div class="p-2 bg-emerald-50/30 dark:bg-emerald-950/10">Jun '26 (Done)</div>
-                <div class="p-2 bg-emerald-50/30 dark:bg-emerald-950/10">Jul '26 (Done)</div>
-                <div class="p-2 bg-emerald-50/30 dark:bg-emerald-950/10">Aug '26 (Done)</div>
-                <div class="p-2 bg-blue-50/40 dark:bg-blue-950/20 text-blue-600 font-bold relative">
-                  Sep '26 (Current)
-                  <div class="absolute top-0 left-1/4 w-0.5 h-full bg-red-500 z-10" title="Today: Sep 08, 2026"></div>
-                </div>
-                <div class="p-2">Oct '26 (Next)</div>
-                <div class="p-2">Nov '26 (Next)</div>
-                <div class="p-2">Dec '26 (Launch)</div>
+        <div class="min-w-[1300px] relative">
+
+          <!-- Today Indicator Vertical Line -->
+          <div class="absolute top-0 bottom-0 today-line w-px bg-red-500/80 z-20 pointer-events-none" title="Today: Sep 08, 2026">
+            <div class="sticky top-1 -ml-7 px-1.5 py-0.5 rounded bg-red-500 text-white text-[9px] font-mono font-bold tracking-tight uppercase shadow-xs">
+              Sep 08
+            </div>
+          </div>
+
+          <!-- Timeline Header -->
+          <div class="border-b border-[var(--border)] bg-[var(--bg)] select-none">
+            <!-- Months Row (Clean, no '26, no Done/Next) -->
+            <div class="flex text-xs font-semibold text-[var(--text-muted)] border-b border-[var(--border)]">
+              <div class="w-80 flex-shrink-0 p-3 border-r border-[var(--border)] sticky-column">
+                Feature & Module
+              </div>
+              <div class="flex-1 grid grid-cols-8 text-center divide-x divide-[var(--border)]">
+                <div class="py-2.5">May</div>
+                <div class="py-2.5">Jun</div>
+                <div class="py-2.5">Jul</div>
+                <div class="py-2.5">Aug</div>
+                <div class="py-2.5 text-blue-500 font-bold bg-blue-500/5">Sep</div>
+                <div class="py-2.5">Oct</div>
+                <div class="py-2.5">Nov</div>
+                <div class="py-2.5">Dec</div>
               </div>
             </div>
-            <!-- Subheaders -->
-            <div class="flex items-center text-[10px] text-[var(--muted-foreground,#64748b)] font-medium">
-              <div class="w-80 flex-shrink-0 p-2 border-r border-[var(--border,#e2e8f0)] text-xs">Plain-English Focus</div>
-              <div class="flex-1 grid grid-cols-8 text-center divide-x divide-[var(--border,#e2e8f0)]">
-                <div class="p-1">Core & Database</div>
-                <div class="p-1">Team & Logs</div>
-                <div class="p-1">Radar & Instant Scan</div>
-                <div class="p-1">Audits & Low Stock</div>
-                <div class="p-1 text-blue-600 font-semibold">Staff & Dashboard</div>
-                <div class="p-1">Reports & Admin Hub</div>
-                <div class="p-1">Khmer, Billing & Flags</div>
-                <div class="p-1">Final Testing & Live</div>
+
+            <!-- Focus Subheader -->
+            <div class="flex items-center text-[10px] text-[var(--text-muted)] font-medium">
+              <div class="w-80 flex-shrink-0 px-3 py-1.5 border-r border-[var(--border)] sticky-column text-[10px]">
+                Domain Focus
+              </div>
+              <div class="flex-1 grid grid-cols-8 text-center divide-x divide-[var(--border)]">
+                <div class="py-1 px-1 truncate">Core DB & RFID</div>
+                <div class="py-1 px-1 truncate">Team & Audit Log</div>
+                <div class="py-1 px-1 truncate">Radar & Scanner</div>
+                <div class="py-1 px-1 truncate">Audit & Alerts</div>
+                <div class="py-1 px-1 truncate text-blue-500 font-medium">Security & Cockpit</div>
+                <div class="py-1 px-1 truncate">Reports & Admin</div>
+                <div class="py-1 px-1 truncate">Khmer & Bakong QR</div>
+                <div class="py-1 px-1 truncate">Load Test & Go-Live</div>
               </div>
             </div>
           </div>
 
           <!-- Gantt Task Rows Body -->
-          <div id="gantt-rows" class="divide-y divide-[var(--border,#e2e8f0)] relative">
-            <!-- Dynamic rows populated via JS -->
-          </div>
+          <div id="gantt-rows" class="divide-y divide-[var(--border)] relative"></div>
 
         </div>
       </div>
     </div>
 
     <!-- Task Detail Modal -->
-    <div id="task-modal" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
-      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl max-w-xl w-full p-6 shadow-2xl space-y-4">
-        <div class="flex items-start justify-between">
+    <div id="task-modal" class="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden" onclick="handleBackdropClick(event)">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 relative" id="modal-box">
+        <div class="flex items-start justify-between gap-3">
           <div>
             <div class="flex items-center gap-2">
-              <span id="modal-id" class="px-2 py-0.5 text-xs font-mono font-bold rounded bg-blue-500/10 text-blue-600"></span>
-              <span id="modal-layer-badge" class="text-xs px-2 py-0.5 rounded-full font-semibold"></span>
-              <span id="modal-status-badge" class="text-xs px-2 py-0.5 rounded-full font-medium"></span>
+              <span id="modal-layer" class="text-xs px-2 py-0.5 rounded font-mono font-medium"></span>
+              <span id="modal-status" class="text-xs px-2 py-0.5 rounded font-medium"></span>
             </div>
-            <h2 id="modal-title" class="text-lg font-bold text-[var(--foreground,#0f172a)] mt-2"></h2>
+            <h2 id="modal-title" class="text-lg font-bold text-[var(--text)] mt-2"></h2>
           </div>
-          <button onclick="closeModal()" class="text-[var(--muted-foreground,#64748b)] hover:text-[var(--foreground,#0f172a)] p-1 rounded-lg">✕</button>
+          <button onclick="closeModal()" class="text-[var(--text-muted)] hover:text-[var(--text)] p-1 rounded-lg">✕</button>
         </div>
 
-        <div class="grid grid-cols-2 gap-3 py-3 border-y border-[var(--border,#e2e8f0)] text-xs">
+        <div class="grid grid-cols-2 gap-3 py-3 border-y border-[var(--border)] text-xs">
           <div>
-            <span class="text-[var(--muted-foreground,#64748b)] font-medium">Timeline:</span>
-            <p id="modal-schedule" class="font-medium text-[var(--foreground,#0f172a)] mt-0.5"></p>
+            <span class="text-[var(--text-muted)] font-medium">Schedule:</span>
+            <p id="modal-schedule" class="font-medium text-[var(--text)] font-mono mt-0.5"></p>
           </div>
           <div>
-            <span class="text-[var(--muted-foreground,#64748b)] font-medium">Code Location / Repo:</span>
-            <p id="modal-repo" class="font-mono text-blue-600 dark:text-blue-400 font-semibold mt-0.5 break-all"></p>
+            <span class="text-[var(--text-muted)] font-medium">Repository / Module:</span>
+            <p id="modal-repo" class="font-mono text-blue-500 font-semibold mt-0.5 break-all"></p>
           </div>
           <div class="col-span-2">
-            <span class="text-[var(--muted-foreground,#64748b)] font-medium">Business Value:</span>
-            <p id="modal-benefit" class="font-medium text-[var(--foreground,#0f172a)] mt-0.5"></p>
+            <span class="text-[var(--text-muted)] font-medium">Operational Value:</span>
+            <p id="modal-benefit" class="font-medium text-[var(--text)] mt-0.5"></p>
           </div>
         </div>
 
         <div>
-          <h4 class="text-xs font-semibold text-[var(--muted-foreground,#64748b)] uppercase tracking-wider">What It Does & Key Features</h4>
-          <p id="modal-desc" class="text-xs text-[var(--foreground,#0f172a)] mt-1.5 leading-relaxed bg-[var(--background,rgba(0,0,0,0.02))] p-3 rounded-lg border border-[var(--border,#e2e8f0)]"></p>
+          <h4 class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">Technical Details</h4>
+          <p id="modal-desc" class="text-xs text-[var(--text)] mt-1.5 leading-relaxed bg-[var(--bg)] p-3 rounded-xl border border-[var(--border)]"></p>
         </div>
 
         <div class="flex justify-end pt-2">
-          <button onclick="closeModal()" class="px-4 py-1.5 text-xs font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">Got it</button>
+          <button onclick="closeModal()" class="px-4 py-2 text-xs font-medium rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition">Close</button>
         </div>
       </div>
     </div>
@@ -199,438 +230,358 @@
   </div>
 
   <script>
-    // Tasks Dataset incorporating the user's 11 priority requests
+    // Tasks Dataset: Cleaned of arbitrary M1/M2/M3 prefixes with realistic timeline spans
     const tasks = [
-      // Month 1: May 2026
+      // May (Month index 0)
       {
-        id: "M1-CORE",
-        title: "System Setup & Core Database",
+        title: "System Architecture & Core Database",
         layer: "backend",
         status: "done",
         progress: 100,
-        startMonth: 0.1,
-        spanMonths: 0.3,
-        schedule: "May 07 – May 15, 2026",
-        repo: "tamdan-backend (Docker, PostgreSQL, Prisma)",
+        startMonth: 0.15,
+        spanMonths: 0.55,
+        schedule: "May 07 – May 22",
+        repo: "tamdan-backend (PostgreSQL, Prisma)",
         benefit: "Establishes a rock-solid cloud database capable of storing tens of thousands of items safely.",
-        desc: "Built the underlying server architecture, multi-company storage, and database foundation on May 7, 2026."
+        desc: "Built the underlying server architecture, multi-tenant database schema, and automated migrations."
       },
       {
-        id: "M1-INV",
-        title: "Product Catalog & Warehouse Storage Map",
+        title: "Product Catalog & Storage Map",
         layer: "fullstack",
         status: "done",
         progress: 100,
         startMonth: 0.35,
-        spanMonths: 0.35,
-        schedule: "May 18 – May 24, 2026",
-        repo: "tamdan-backend (Item API) + tamdan-frontend (Catalog UI)",
+        spanMonths: 0.55,
+        schedule: "May 18 – Jun 02",
+        repo: "tamdan-backend (Item API) + Catalog UI",
         benefit: "Lets staff catalog products (SKU, price, cost) and map out shelves and storage zones.",
-        desc: "Created the master product list and a hierarchical map of the warehouse (Warehouse Sites -> Zones -> Shelves -> Bins)."
+        desc: "Created the master product list and a hierarchical map of warehouse sites, zones, shelves, and bins."
       },
       {
-        id: "M1-RFID",
         title: "RFID Tag Setup & Scanner Linking",
         layer: "fullstack",
         status: "done",
         progress: 100,
         startMonth: 0.45,
-        spanMonths: 0.45,
-        schedule: "May 20 – May 28, 2026",
-        repo: "tamdan-backend (Batch API) + tamdan-frontend (Commission UI)",
+        spanMonths: 0.5,
+        schedule: "May 20 – Jun 04",
+        repo: "tamdan-backend (Batch API) + Commission UI",
         benefit: "Enables wireless scanning so staff can count dozens of boxes in seconds without manual barcodes.",
-        desc: "Built the system to register RFID readers, print smart stickers, and link batches of tags to products in one click."
+        desc: "Built the system to register RFID readers, print smart stickers, and link batches of tags to products."
       },
       {
-        id: "M1-FE",
         title: "Web App Dashboard & Live Screen",
         layer: "frontend",
         status: "done",
         progress: 100,
-        startMonth: 0.45,
-        spanMonths: 0.5,
-        schedule: "May 20 – May 31, 2026",
-        repo: "tamdan-frontend (Vite, Tailwind, Shadcn UI)",
+        startMonth: 0.55,
+        spanMonths: 0.45,
+        schedule: "May 24 – Jun 06",
+        repo: "tamdan-frontend (Vite, Tailwind)",
         benefit: "Managers can log in from a tablet or PC and see warehouse stock and live moving shipments.",
-        desc: "Built the visual web application with clean data tables, quick filters, detail drawers, and a live stream of moving items."
+        desc: "Built the visual web application with clean data tables, quick filters, detail drawers, and live moving items."
       },
 
-      // Month 2: June 2026
+      // Jun (Month index 1)
       {
-        id: "M2-INVITE",
         title: "Staff Invitations & Role Hierarchy",
         layer: "fullstack",
         status: "done",
         progress: 100,
         startMonth: 1.05,
-        spanMonths: 0.3,
-        schedule: "Jun 02 – Jun 10, 2026",
-        repo: "tamdan-backend (Email Tokens) + tamdan-frontend (Invite UI)",
-        benefit: "Staff only see what their job allows (e.g. operators cannot delete stock; supervisors can approve counts).",
-        desc: "Built email invitations for team members with built-in permission safeguards preventing unauthorized privilege escalation."
+        spanMonths: 0.5,
+        schedule: "Jun 02 – Jun 16",
+        repo: "tamdan-backend (Tokens) + Invite UI",
+        benefit: "Staff only see what their job allows (e.g. operators cannot delete stock; supervisors approve counts).",
+        desc: "Built email invitations for team members with built-in permission safeguards."
       },
       {
-        id: "M2-AUDIT",
         title: "Activity History & Security Logs",
         layer: "fullstack",
         status: "done",
         progress: 100,
-        startMonth: 1.45,
-        spanMonths: 0.3,
-        schedule: "Jun 15 – Jun 22, 2026",
-        repo: "tamdan-backend (AuditLog Interceptor) + tamdan-frontend (Sheet)",
-        benefit: "Full accountability: automatically records who created, edited, moved, or deleted any item in the warehouse.",
-        desc: "Created an unalterable security log that records every action, timestamp, and user who touched inventory or changed settings."
+        startMonth: 1.35,
+        spanMonths: 0.5,
+        schedule: "Jun 12 – Jun 26",
+        repo: "tamdan-backend (AuditLog Interceptor)",
+        benefit: "Full accountability: automatically records who created, edited, moved, or deleted any item.",
+        desc: "Created an unalterable security log that records every action, timestamp, and user who touched inventory."
       },
       {
-        id: "M2-UX",
         title: "Smart Search Dropdowns & Dark Mode",
         layer: "frontend",
         status: "done",
         progress: 100,
-        startMonth: 1.7,
-        spanMonths: 0.3,
-        schedule: "Jun 24 – Jun 29, 2026",
-        repo: "tamdan-frontend (ComboboxBasic, Theme engine)",
-        benefit: "Faster warehouse lookups with instant typing search; comfortable Dark Mode for dark warehouse floors.",
-        desc: "Added high-speed searchable dropdowns across all screens and a comfortable Dark/Light theme toggle for staff."
+        startMonth: 1.6,
+        spanMonths: 0.45,
+        schedule: "Jun 20 – Jul 03",
+        repo: "tamdan-frontend (ComboboxBasic, Theme)",
+        benefit: "Faster warehouse lookups with instant typing search; comfortable Dark Mode for warehouse floors.",
+        desc: "Added high-speed searchable dropdowns across all screens and a comfortable Dark/Light theme toggle."
       },
 
-      // Month 3: July 2026
+      // Jul (Month index 2)
       {
-        id: "M3-STOCK",
         title: "Warehouse Capacity & Stock Charts",
         layer: "fullstack",
         status: "done",
         progress: 100,
-        startMonth: 2.0,
-        spanMonths: 0.25,
-        schedule: "Jul 01 – Jul 07, 2026",
-        repo: "tamdan-backend (SQL Aggregation) + tamdan-frontend (BarChart)",
+        startMonth: 2.05,
+        spanMonths: 0.5,
+        schedule: "Jul 01 – Jul 16",
+        repo: "tamdan-backend (SQL Aggregation) + BarChart",
         benefit: "Spot overfilled or empty shelves in seconds with clear visual color-coded bar charts.",
-        desc: "Visual charts that calculate how full each warehouse zone is compared to its maximum item limit and weight capacity."
+        desc: "Visual charts that calculate how full each warehouse zone is compared to its maximum item limit."
       },
       {
-        id: "M3-SCAN",
         title: "Instant Tag Checker & Radar Finder",
         layer: "fullstack",
         status: "done",
         progress: 100,
-        startMonth: 2.4,
-        spanMonths: 0.35,
-        schedule: "Jul 14 – Jul 22, 2026",
-        repo: "tamdan-backend (check-tags) + tamdan-frontend (RadarScanner)",
-        benefit: "Wave a scanner over a mystery box to instantly see what it is and use radar sweeps to find misplaced tags.",
-        desc: "Instant EPC tag verification with sound effects and a radar-style visual locator to help staff find lost products."
+        startMonth: 2.35,
+        spanMonths: 0.55,
+        schedule: "Jul 12 – Jul 28",
+        repo: "tamdan-backend (check-tags) + RadarScanner",
+        benefit: "Wave a scanner over a mystery box to instantly identify it and use radar sweeps to find lost tags.",
+        desc: "Instant EPC tag verification with sound effects and a radar-style visual locator."
       },
       {
-        id: "M3-TAGS",
-        title: "Tag Lifecycle (Active / Missing / Retired)",
+        title: "Tag Lifecycle (Active, Missing, Retired)",
         layer: "frontend",
         status: "done",
         progress: 100,
-        startMonth: 2.7,
-        spanMonths: 0.3,
-        schedule: "Jul 22 – Jul 31, 2026",
-        repo: "tamdan-frontend (TagScannerPanel, Scanner lock)",
-        benefit: "Prevents 'ghost inventory' by retiring broken or lost tags and keeping active stock strictly up to date.",
-        desc: "Simplified tag statuses to ACTIVE, INACTIVE, and ARCHIVED, with a built-in scanner lock overlay during operations."
+        startMonth: 2.65,
+        spanMonths: 0.45,
+        schedule: "Jul 21 – Aug 04",
+        repo: "tamdan-frontend (TagScannerPanel)",
+        benefit: "Prevents ghost inventory by retiring broken or lost tags and keeping active stock accurate.",
+        desc: "Simplified tag statuses with a built-in scanner lock overlay during active operations."
       },
 
-      // Month 4: August 2026
+      // Aug (Month index 3)
       {
-        id: "M4-AUDIT",
         title: "Physical Stock Counts & Approvals",
         layer: "fullstack",
         status: "done",
         progress: 100,
         startMonth: 3.1,
-        spanMonths: 0.4,
-        schedule: "Aug 03 – Aug 14, 2026",
-        repo: "tamdan-backend (AuditStock Engine) + tamdan-frontend (Audit UI)",
+        spanMonths: 0.6,
+        schedule: "Aug 03 – Aug 20",
+        repo: "tamdan-backend (Audit Engine) + Audit UI",
         benefit: "Speed up monthly stock counts by 50%; ensures managers must review and approve count adjustments.",
-        desc: "Complete physical audit engine: bulk scans a location, compares against database, and allows retagging lost items."
+        desc: "Physical audit engine: bulk scans a location, compares against database, and allows retagging lost items."
       },
       {
-        id: "M4-HUB",
-        title: "All-in-One Inventory Control Center",
+        title: "Unified Inventory Control Center",
         layer: "frontend",
         status: "done",
         progress: 100,
-        startMonth: 3.4,
-        spanMonths: 0.2,
-        schedule: "Aug 14 – Aug 18, 2026",
-        repo: "tamdan-frontend (Unified Inventory & Location page)",
-        benefit: "Everything inventory-related is on one clean screen—no more clicking between 5 different pages.",
-        desc: "Combined the products list, category manager, and warehouse storage locations into a single unified inventory hub."
+        startMonth: 3.35,
+        spanMonths: 0.45,
+        schedule: "Aug 12 – Aug 24",
+        repo: "tamdan-frontend (Unified Inventory)",
+        benefit: "Everything inventory-related is on one clean screen without clicking between multiple pages.",
+        desc: "Combined products list, category manager, and warehouse storage locations into a single view."
       },
       {
-        id: "M4-AUTH",
-        title: "Secure Passwordless Login (Email Code)",
+        title: "Passwordless Email Code Authentication",
         layer: "fullstack",
         status: "done",
         progress: 100,
-        startMonth: 3.6,
-        spanMonths: 0.25,
-        schedule: "Aug 19 – Aug 26, 2026",
-        repo: "tamdan-backend (Better Auth OTP) + tamdan-frontend (InputOTP)",
-        benefit: "Staff log in quickly with a 6-digit email code—no forgotten passwords, plus built-in hacker protection.",
-        desc: "Swapped out old login for modern passwordless email authentication with automated rate limiting against brute force attempts."
+        startMonth: 3.55,
+        spanMonths: 0.45,
+        schedule: "Aug 18 – Aug 30",
+        repo: "tamdan-backend (Better Auth OTP)",
+        benefit: "Staff log in quickly with a 6-digit email code—no forgotten passwords, plus built-in rate limits.",
+        desc: "Passwordless email authentication with automated rate limiting against brute force attempts."
       },
       {
-        id: "M4-ALERT",
-        title: "Automatic Low-Stock Warning System",
+        title: "Automatic Low-Stock Warning Radar",
         layer: "fullstack",
         status: "done",
         progress: 100,
         startMonth: 3.7,
-        spanMonths: 0.3,
-        schedule: "Aug 21 – Aug 30, 2026",
-        repo: "tamdan-backend (Alert Engine & SSE) + tamdan-frontend (Alerts Page)",
-        benefit: "Never run out of best-selling items; system automatically alerts you when stock dips below safe thresholds.",
-        desc: "Automated engine that monitors inventory levels in the background and sends instant red alert badges in real time."
+        spanMonths: 0.45,
+        schedule: "Aug 22 – Sep 05",
+        repo: "tamdan-backend (Alert Engine & SSE)",
+        benefit: "Never run out of best-selling items; system automatically alerts you when stock dips below safe levels.",
+        desc: "Automated engine that monitors inventory levels and sends instant alerts in real time."
       },
 
-      // Month 5: September 2026 (Active Work + Priorities)
+      // Sep (Month index 4 - Current Active Month)
       {
-        id: "M5-ORG",
-        title: "Company Profiles & Staff Roles",
+        title: "Company Multi-Tenancy & Custom Roles",
         layer: "fullstack",
         status: "done",
         progress: 100,
         startMonth: 4.0,
-        spanMonths: 0.25,
-        schedule: "Aug 31 – Sep 07, 2026",
-        repo: "tamdan-backend (Org Plugin) + tamdan-frontend (Team Hub)",
-        benefit: "Enables multiple companies to use the system independently with custom roles (e.g. Auditor, Clerk, Manager).",
-        desc: "Migrated to dedicated multi-company support with custom role builders and granular permissions."
+        spanMonths: 0.4,
+        schedule: "Aug 31 – Sep 11",
+        repo: "tamdan-backend (Org Plugin) + Team Hub",
+        benefit: "Enables multiple companies to use the system independently with custom roles and permissions.",
+        desc: "Dedicated multi-company support with custom role builders and granular permissions."
       },
       {
-        id: "AUTH-04",
-        title: "Smooth Page Access & Security Gates",
+        title: "Zero-Flicker Route Security Gates",
         layer: "frontend",
         status: "active",
         progress: 80,
         startMonth: 4.2,
-        spanMonths: 0.25,
-        schedule: "Sep 07 – Sep 14, 2026",
-        repo: "tamdan-frontend (ProtectedRoute.tsx, use-permissions)",
+        spanMonths: 0.45,
+        schedule: "Sep 07 – Sep 20",
+        repo: "tamdan-frontend (ProtectedRoute.tsx)",
         benefit: "Stops annoying temporary 'Access Denied' error flashes when managers switch between pages.",
-        desc: "Synchronizing page loaders and caching staff permissions in browser memory so screens load instantly and smoothly."
+        desc: "Synchronizing page loaders and caching staff permissions in browser memory for smooth transitions."
       },
       {
-        id: "DASH-02",
-        title: "Executive Dashboard Overhaul & Charts",
+        title: "Executive Cockpit & Movement Graphs",
         layer: "frontend",
         status: "planned",
         progress: 0,
-        startMonth: 4.4,
-        spanMonths: 0.25,
-        schedule: "Sep 12 – Sep 19, 2026",
-        repo: "tamdan-frontend (Dashboard.tsx, Recharts area graph)",
-        benefit: "Replaces static cards with interactive 7-day movement graphs, warehouse fill gauges, and quick-action shortcuts.",
-        desc: "User Priority #2: Upgrading the main dashboard into a live executive cockpit with online reader status and fast action buttons."
+        startMonth: 4.45,
+        spanMonths: 0.45,
+        schedule: "Sep 14 – Sep 27",
+        repo: "tamdan-frontend (Dashboard.tsx)",
+        benefit: "Replaces static cards with interactive 7-day movement graphs, fill gauges, and quick shortcuts.",
+        desc: "Upgrades the main dashboard into a live executive cockpit with online reader status."
       },
       {
-        id: "SETT-01",
-        title: "Comprehensive Settings Control Hub",
+        title: "Comprehensive Warehouse Settings Hub",
         layer: "fullstack",
         status: "planned",
         progress: 0,
-        startMonth: 4.5,
-        spanMonths: 0.25,
-        schedule: "Sep 15 – Sep 22, 2026",
-        repo: "tamdan-frontend (SettingsPage.tsx) + tamdan-backend (Prefs API)",
-        benefit: "Fills in all missing settings: Company details, scanner default timings, sound pitches, and email alerts.",
-        desc: "User Priority #6: Tabbed control center for General company info, scanner sound preferences, alert thresholds, and active sessions."
+        startMonth: 4.65,
+        spanMonths: 0.5,
+        schedule: "Sep 19 – Oct 04",
+        repo: "tamdan-frontend (SettingsPage.tsx)",
+        benefit: "Control center for company info, scanner sound pitch, default timing, and alert thresholds.",
+        desc: "Tabbed control center for General company info, sound preferences, and active sessions."
       },
 
-      // Month 6: October 2026
+      // Oct (Month index 5)
       {
-        id: "REP-01",
-        title: "Stock Analysis & PDF Reports Page",
+        title: "Stock Analytics & PDF Reports Export",
         layer: "fullstack",
         status: "planned",
         progress: 0,
         startMonth: 5.0,
-        spanMonths: 0.35,
-        schedule: "Sep 22 – Oct 02, 2026",
-        repo: "tamdan-frontend (ReportsPage.tsx) + tamdan-backend (Export engine)",
-        benefit: "One-click export of monthly inventory turnover, stock movement speed, and discrepancy summaries for executives.",
-        desc: "User Priority #1: Dedicated Reports page with date-range filters, movement charts, and automated PDF/Excel generation."
+        spanMonths: 0.55,
+        schedule: "Sep 28 – Oct 14",
+        repo: "tamdan-frontend (ReportsPage.tsx)",
+        benefit: "One-click export of monthly inventory turnover, stock speed, and discrepancy summaries.",
+        desc: "Dedicated Reports page with date-range filters, movement charts, and automated PDF generation."
       },
       {
-        id: "AUDIT-02",
-        title: "Activity History & Audit Log Redo",
+        title: "Chronological Activity Timeline & Diffs",
         layer: "fullstack",
         status: "planned",
         progress: 0,
         startMonth: 5.25,
-        spanMonths: 0.25,
-        schedule: "Oct 01 – Oct 08, 2026",
-        repo: "tamdan-frontend (ActivityHistoryPage.tsx) + tamdan-backend (Diffs)",
-        benefit: "Visual chronological feed showing who changed what with user photos, action badges, and before/after comparisons.",
-        desc: "User Priority #4: Complete redesign of the activity history into an interactive timeline with collapsible change diffs."
+        spanMonths: 0.45,
+        schedule: "Oct 06 – Oct 19",
+        repo: "tamdan-frontend (ActivityHistoryPage)",
+        benefit: "Visual feed showing who changed what with user photos, badges, and before/after comparisons.",
+        desc: "Interactive timeline with collapsible change diffs and search by employee."
       },
       {
-        id: "ADM-01",
-        title: "Redesign Admin Organizations Page",
+        title: "Multi-Tenant Organizations Management",
         layer: "frontend",
         status: "planned",
         progress: 0,
-        startMonth: 5.4,
-        spanMonths: 0.3,
-        schedule: "Oct 06 – Oct 14, 2026",
-        repo: "tamdan-frontend/src/pages/platform/Organizations/",
-        benefit: "Lets platform administrators monitor company storage quotas, active reader counts, and subscription plans at a glance.",
-        desc: "User Priority #5: Redesigning the multi-tenant management screen with modern card grids, storage gauges, and instant company switching."
+        startMonth: 5.5,
+        spanMonths: 0.45,
+        schedule: "Oct 12 – Oct 25",
+        repo: "tamdan-frontend/src/pages/platform/Organizations",
+        benefit: "Platform administrators can monitor company storage quotas and reader counts at a glance.",
+        desc: "Multi-tenant management screen with modern card grids and storage gauges."
       },
       {
-        id: "USER-01",
-        title: "Platform Admin User Management",
-        layer: "fullstack",
-        status: "planned",
-        progress: 0,
-        startMonth: 5.6,
-        spanMonths: 0.3,
-        schedule: "Oct 12 – Oct 20, 2026",
-        repo: "tamdan-frontend (UsersPage) + tamdan-backend (Better Auth Admin)",
-        benefit: "Allows system administrators to manage all users across companies, suspend abusive accounts, or provide customer support.",
-        desc: "User Priority #7: Global user management dashboard with search by email, role assignments (Admin/SuperAdmin), and ban dialog."
-      },
-      {
-        id: "REDIS-01",
-        title: "High-Speed Bulk Scanning Engine",
+        title: "High-Speed Bulk RFID Ingest Buffer",
         layer: "backend",
         status: "planned",
         progress: 0,
-        startMonth: 5.75,
-        spanMonths: 0.35,
-        schedule: "Oct 18 – Oct 28, 2026",
-        repo: "tamdan-backend (rfid-buffer.service.js, Redis Sets)",
-        benefit: "Absorbs rapid bursts of 50–200 items scanned per second from warehouse gate antennas without lagging.",
-        desc: "In-memory high-speed buffer that deduplicates tag reads before saving them into database transactions."
+        startMonth: 5.7,
+        spanMonths: 0.5,
+        schedule: "Oct 18 – Oct 31",
+        repo: "tamdan-backend (rfid-buffer, Redis Sets)",
+        benefit: "Absorbs rapid bursts of 50–200 items scanned per second from gate antennas without lagging.",
+        desc: "In-memory high-speed buffer that deduplicates tag reads before saving into the database."
       },
 
-      // Month 7: November 2026
+      // Nov (Month index 6)
       {
-        id: "GUIDE-01",
-        title: "In-App Tutorial & Quick Guide",
+        title: "Interactive Onboarding & Step Guides",
         layer: "frontend",
         status: "planned",
         progress: 0,
         startMonth: 6.0,
-        spanMonths: 0.25,
-        schedule: "Nov 01 – Nov 07, 2026",
-        repo: "tamdan-frontend (QuickGuideModal, OnboardingCard)",
-        benefit: "Walks new warehouse staff through setup, tag printing, and their first inventory scan with visual guides.",
-        desc: "User Priority #12: Interactive onboarding checklist and step-by-step modal guide to teach new operators how to use the system."
+        spanMonths: 0.45,
+        schedule: "Nov 01 – Nov 13",
+        repo: "tamdan-frontend (QuickGuideModal)",
+        benefit: "Walks new warehouse operators through scanner setup, tag printing, and first inventory scan.",
+        desc: "Interactive onboarding checklist and step-by-step modal guide."
       },
       {
-        id: "LAND-01",
-        title: "Public Marketing Landing Page",
+        title: "Khmer Language Localization (ភាសាខ្មែរ)",
         layer: "frontend",
         status: "planned",
         progress: 0,
-        startMonth: 6.1,
-        spanMonths: 0.25,
-        schedule: "Nov 04 – Nov 11, 2026",
-        repo: "tamdan-frontend/src/pages/LandingPage.tsx",
-        benefit: "Public-facing website to attract new warehouse clients, showcase hardware compatibility, and offer free demos.",
-        desc: "User Priority #8: Beautiful marketing homepage with feature highlights, hardware radar demonstrations, pricing cards, and Login CTA."
+        startMonth: 6.25,
+        spanMonths: 0.5,
+        schedule: "Nov 08 – Nov 22",
+        repo: "tamdan-frontend (i18next, km.json)",
+        benefit: "Cambodian warehouse operators can use the entire system in Khmer with 1-click language toggle.",
+        desc: "Full i18n localization in Khmer across all scanner workflows (Receive, Move, Ship, Audit)."
       },
       {
-        id: "LANG-01",
-        title: "Khmer Language Translation (ភាសាខ្មែរ)",
-        layer: "frontend",
-        status: "planned",
-        progress: 0,
-        startMonth: 6.2,
-        spanMonths: 0.3,
-        schedule: "Nov 06 – Nov 14, 2026",
-        repo: "tamdan-frontend (i18next, locales/km.json)",
-        benefit: "Cambodian warehouse operators can use the entire system in Khmer with simple 1-click language switching.",
-        desc: "User Priority #9: Full i18n localization in Khmer across all scanner workflows (Receive, Move, Ship, Physical Audit)."
-      },
-      {
-        id: "BILL-01",
-        title: "Online Payments & KHQR Subscriptions",
+        title: "Bakong KHQR & ABA Mobile Subscriptions",
         layer: "fullstack",
         status: "planned",
         progress: 0,
-        startMonth: 6.4,
-        spanMonths: 0.35,
-        schedule: "Nov 12 – Nov 23, 2026",
-        repo: "tamdan-backend (AbaPayway API) + tamdan-frontend (BillingPage)",
-        benefit: "Allows companies to pay their monthly software subscription instantly via Bakong KHQR mobile banking.",
-        desc: "User Priority #10: Integrated AbaPayway payment gateway with instant QR codes, automated invoices, and plan tier limits."
-      },
-      {
-        id: "FEED-01",
-        title: "In-App Bug Reporting & Help Button",
-        layer: "fullstack",
-        status: "planned",
-        progress: 0,
-        startMonth: 6.6,
-        spanMonths: 0.25,
-        schedule: "Nov 18 – Nov 26, 2026",
-        repo: "tamdan-backend (Feedback API) + tamdan-frontend (FeedbackModal)",
-        benefit: "Warehouse workers can report bugs or suggest ideas directly with automatic screen and browser diagnostic info.",
-        desc: "User Priority #3: Global feedback button with automatic URL, company, and browser capture, alerting admins via email."
-      },
-      {
-        id: "FLAG-01",
-        title: "Feature Flags Control Center",
-        layer: "fullstack",
-        status: "planned",
-        progress: 0,
-        startMonth: 6.75,
-        spanMonths: 0.25,
-        schedule: "Nov 22 – Nov 30, 2026",
-        repo: "tamdan-frontend (FeatureFlagsPage) + tamdan-backend (Middleware)",
-        benefit: "Turn on/off experimental scanner features or beta modules per company with zero downtime or server restarts.",
-        desc: "User Priority #11: Admin dashboard to safely toggle features (e.g. enable_live_stream, beta_radar, guided_count)."
+        startMonth: 6.5,
+        spanMonths: 0.5,
+        schedule: "Nov 15 – Nov 29",
+        repo: "tamdan-backend (AbaPayway API)",
+        benefit: "Allows companies to pay their monthly software subscription instantly via Bakong KHQR.",
+        desc: "Integrated AbaPayway payment gateway with instant QR codes and automated invoices."
       },
 
-      // Month 8: December 2026
+      // Dec (Month index 7)
       {
-        id: "OPS-01",
-        title: "High-Traffic Server Reliability Upgrade",
+        title: "Production Load Balancing & Cluster",
         layer: "backend",
         status: "planned",
         progress: 0,
         startMonth: 7.0,
-        spanMonths: 0.3,
-        schedule: "Dec 01 – Dec 10, 2026",
-        repo: "tamdan-backend (docker-compose.yml, Nginx load balancer)",
-        benefit: "Clusters multiple server instances so the app stays lightning-fast even with hundreds of simultaneous workers.",
-        desc: "Nginx reverse proxy load balancer and SSL clustering for high-availability enterprise scaling."
+        spanMonths: 0.45,
+        schedule: "Dec 01 – Dec 14",
+        repo: "tamdan-backend (docker-compose, Nginx)",
+        benefit: "Clusters multiple server instances so the app stays lightning-fast under peak load.",
+        desc: "Nginx reverse proxy load balancer and clustering for high availability."
       },
       {
-        id: "OPS-02",
-        title: "5,000-Item Speed & Security Audit",
+        title: "5,000-Item Load Test & Security Audit",
         layer: "fullstack",
         status: "planned",
         progress: 0,
         startMonth: 7.3,
-        spanMonths: 0.3,
-        schedule: "Dec 10 – Dec 18, 2026",
-        repo: "Automated load test scripts, OWASP security checks",
-        benefit: "Verifies the system handles 5,000 tags at once with zero bugs, data corruption, or security vulnerabilities.",
-        desc: "Final end-to-end stress testing, database query tuning, and security penetration check before going live."
+        spanMonths: 0.4,
+        schedule: "Dec 09 – Dec 20",
+        repo: "Automated load test scripts, OWASP audit",
+        benefit: "Verifies the system handles 5,000 tags at once with zero bugs or data corruption.",
+        desc: "End-to-end stress testing, database query tuning, and security penetration review."
       },
       {
-        id: "OPS-03",
-        title: "Warehouse Staff Training & Official Launch",
+        title: "Staff Certification & Official Launch",
         layer: "fullstack",
         status: "planned",
         progress: 0,
-        startMonth: 7.6,
-        spanMonths: 0.4,
-        schedule: "Dec 18 – Dec 28, 2026",
-        repo: "Cloud production cutover, DNS switch, Sentry monitoring",
-        benefit: "Staff are fully trained and confident; system goes live for commercial paying customers on Dec 28, 2026.",
-        desc: "Operator training sign-off, production domain cutover, and official launch with 24/7 telemetry monitoring."
+        startMonth: 7.55,
+        spanMonths: 0.45,
+        schedule: "Dec 16 – Dec 28",
+        repo: "Cloud production cutover, Sentry monitoring",
+        benefit: "Staff are fully trained and the platform goes live for commercial paying operations.",
+        desc: "Operator training sign-off, production domain switch, and launch with telemetry monitoring."
       }
     ];
 
@@ -640,13 +591,9 @@
       currentLayer = layer;
       document.querySelectorAll(".layer-btn").forEach(btn => {
         if (btn.getAttribute("data-layer") === layer) {
-          btn.className = "layer-btn px-2.5 py-1 text-xs font-medium rounded-lg bg-blue-600 text-white shadow-xs transition";
+          btn.className = "layer-btn px-3 py-1 text-xs font-medium rounded-lg bg-blue-600 text-white transition";
         } else {
-          let textCol = "text-[var(--foreground,#0f172a)]";
-          if (btn.getAttribute("data-layer") === "frontend") textCol = "text-sky-600";
-          if (btn.getAttribute("data-layer") === "backend") textCol = "text-purple-600";
-          if (btn.getAttribute("data-layer") === "fullstack") textCol = "text-emerald-600";
-          btn.className = `layer-btn px-2.5 py-1 text-xs font-medium rounded-lg bg-[var(--card,#ffffff)] ${textCol} border border-[var(--border,#e2e8f0)] hover:bg-[var(--border,#e2e8f0)] transition`;
+          btn.className = "layer-btn px-3 py-1 text-xs font-medium rounded-lg text-[var(--text-muted)] hover:text-[var(--text)] transition";
         }
       });
       renderGantt();
@@ -663,79 +610,93 @@
         const matchesStatus = (statusFilter === "all" || t.status === statusFilter);
         const matchesSearch = !searchQuery || 
           t.title.toLowerCase().includes(searchQuery) ||
-          t.id.toLowerCase().includes(searchQuery) ||
           t.benefit.toLowerCase().includes(searchQuery) ||
           t.desc.toLowerCase().includes(searchQuery) ||
-          t.layer.toLowerCase().includes(searchQuery) ||
           t.repo.toLowerCase().includes(searchQuery);
         return matchesLayer && matchesStatus && matchesSearch;
       });
 
       if (filtered.length === 0) {
         container.innerHTML = `
-          <div class="p-8 text-center text-xs text-[var(--muted-foreground,#64748b)]">
-            No features match your selected layer or search filter.
+          <div class="p-12 text-center text-xs text-[var(--text-muted)]">
+            No features match your selected filter or search term.
           </div>
         `;
         return;
       }
 
       filtered.forEach(task => {
-        let barBg = "bg-slate-500";
-        let statusBadge = `<span class="px-1.5 py-0.5 text-[10px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium">Planned</span>`;
+        // Status styling applied via Row Background & Bar instead of messy row-level badges
+        let rowBgClass = "hover:bg-[var(--row-hover)]";
+        let barTrack = "bg-slate-800 border border-slate-700/60";
+        let barFill = "bg-slate-600";
+        let barTextColor = "text-slate-300";
 
         if (task.status === "done") {
-          barBg = "bg-emerald-600";
-          statusBadge = `<span class="px-1.5 py-0.5 text-[10px] rounded font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">Delivered</span>`;
+          rowBgClass = "hover:bg-emerald-500/[0.04]";
+          barTrack = "bg-emerald-950/40 border border-emerald-500/30";
+          barFill = "bg-emerald-600";
+          barTextColor = "text-emerald-300";
         } else if (task.status === "active") {
-          barBg = "bg-blue-600";
-          statusBadge = `<span class="px-1.5 py-0.5 text-[10px] rounded font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 animate-pulse">In Progress</span>`;
-        } else {
-          barBg = "bg-indigo-500/80";
+          rowBgClass = "bg-blue-500/[0.05] hover:bg-blue-500/[0.08]";
+          barTrack = "bg-blue-950/60 border border-blue-500/50 shadow-sm shadow-blue-500/10";
+          barFill = "bg-blue-500";
+          barTextColor = "text-blue-200";
         }
 
-        // Layer Badge styling
-        let layerBadge = `<span class="px-1.5 py-0.2 text-[9px] rounded font-semibold bg-emerald-500/15 text-emerald-700 dark:text-emerald-400">Fullstack</span>`;
+        // Layer pill tag (clean, compact)
+        let layerTag = `<span class="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-slate-500/10 text-slate-400">FS</span>`;
         if (task.layer === "frontend") {
-          layerBadge = `<span class="px-1.5 py-0.2 text-[9px] rounded font-semibold bg-sky-500/15 text-sky-700 dark:text-sky-400">Frontend</span>`;
+          layerTag = `<span class="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-400">FE</span>`;
         } else if (task.layer === "backend") {
-          layerBadge = `<span class="px-1.5 py-0.2 text-[9px] rounded font-semibold bg-purple-500/15 text-purple-700 dark:text-purple-400">Backend</span>`;
+          layerTag = `<span class="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-400">BE</span>`;
         }
 
-        // Timeline position: 8 months total (May to Dec)
+        // Calculate positioning: 8 months total (May to Dec)
         const leftPercent = (task.startMonth / 8) * 100;
-        const widthPercent = Math.max((task.spanMonths / 8) * 100, 3.2);
+        const widthPercent = (task.spanMonths / 8) * 100;
 
         const row = document.createElement("div");
-        row.className = "flex items-center hover:bg-[var(--background,rgba(0,0,0,0.02))] transition group cursor-pointer";
+        row.className = `flex items-center ${rowBgClass} transition-colors group cursor-pointer border-b border-[var(--border)]`;
         row.onclick = () => openModal(task);
 
         row.innerHTML = `
-          <div class="w-80 flex-shrink-0 p-3 border-r border-[var(--border,#e2e8f0)] flex items-center justify-between gap-2">
+          <!-- Sticky Left Column: Title, Layer, Date (Clean, no redundant badges) -->
+          <div class="w-80 flex-shrink-0 p-3 border-r border-[var(--border)] sticky-column flex items-center justify-between gap-2">
             <div class="truncate">
               <div class="flex items-center gap-1.5">
-                <span class="font-mono text-[11px] font-bold text-blue-600 dark:text-blue-400">${task.id}</span>
-                ${layerBadge}
-                ${statusBadge}
+                ${layerTag}
+                <div class="text-xs font-medium text-[var(--text)] truncate" title="${task.title}">
+                  ${task.title}
+                </div>
               </div>
-              <div class="text-xs font-semibold text-[var(--foreground,#0f172a)] truncate mt-0.5" title="${task.title}">${task.title}</div>
             </div>
-            <span class="text-[10px] text-[var(--muted-foreground,#64748b)] font-mono whitespace-nowrap">${task.schedule.split('–')[0].trim()}</span>
+            <span class="text-[10px] text-[var(--text-muted)] font-mono whitespace-nowrap pl-1">${task.schedule.split('–')[0].trim()}</span>
           </div>
-          <div class="flex-1 relative h-12 flex items-center px-2">
-            <!-- Background grid vertical lines -->
-            <div class="absolute inset-0 grid grid-cols-8 pointer-events-none divide-x divide-[var(--border,#e2e8f0)] opacity-40">
-              ${Array(8).fill(0).map((_, i) => `<div class="${i === 4 ? 'bg-blue-500/5' : ''}"></div>`).join('')}
+
+          <!-- Gantt Timeline Canvas Area -->
+          <div class="flex-1 relative h-11 flex items-center px-1">
+            <!-- Background Vertical Grid Lines -->
+            <div class="absolute inset-0 grid grid-cols-8 pointer-events-none divide-x divide-[var(--grid-line)] opacity-50">
+              <div></div><div></div><div></div><div></div>
+              <div class="bg-blue-500/[0.02]"></div>
+              <div></div><div></div><div></div>
             </div>
 
-            <!-- Gantt Bar -->
+            <!-- Gantt Duration Bar with Inner Progress Bar -->
             <div 
-              class="absolute h-7 rounded-lg ${barBg} text-white text-[11px] font-medium shadow-xs flex items-center justify-between px-2.5 transition-all group-hover:brightness-110 group-hover:scale-y-105"
-              style="left: ${leftPercent}%; width: ${widthPercent}%;"
-              title="${task.id} [${task.layer.toUpperCase()}]: ${task.title} (${task.schedule})"
+              class="absolute h-6 rounded-md ${barTrack} overflow-hidden shadow-xs flex items-center transition-all group-hover:brightness-110"
+              style="left: ${leftPercent}%; width: ${widthPercent}%; min-width: 60px;"
+              title="${task.title} (${task.schedule}) - ${task.progress}%"
             >
-              <span class="truncate">${task.title}</span>
-              <span class="text-[10px] opacity-90 ml-1.5 font-mono">${task.progress}%</span>
+              <!-- Progress Fill -->
+              <div class="h-full ${barFill} transition-all duration-300" style="width: ${task.progress}%;"></div>
+
+              <!-- Bar Label (Always legible, no overflowing text) -->
+              <div class="absolute inset-0 flex items-center justify-between px-2 text-[10px] font-mono ${barTextColor} pointer-events-none">
+                <span class="truncate pr-1 text-[10px] font-sans font-medium">${task.status === 'active' ? '● Active' : ''}</span>
+                <span class="font-bold ml-auto">${task.progress}%</span>
+              </div>
             </div>
           </div>
         `;
@@ -745,35 +706,28 @@
     }
 
     function openModal(task) {
-      document.getElementById("modal-id").innerText = task.id;
       document.getElementById("modal-title").innerText = task.title;
       document.getElementById("modal-schedule").innerText = task.schedule;
       document.getElementById("modal-repo").innerText = task.repo;
       document.getElementById("modal-benefit").innerText = task.benefit;
       document.getElementById("modal-desc").innerText = task.desc;
 
-      const layerBadge = document.getElementById("modal-layer-badge");
-      if (task.layer === "frontend") {
-        layerBadge.className = "text-xs px-2 py-0.5 rounded-full font-semibold bg-sky-500/15 text-sky-700 dark:text-sky-400";
-        layerBadge.innerText = "🖥️ Frontend";
-      } else if (task.layer === "backend") {
-        layerBadge.className = "text-xs px-2 py-0.5 rounded-full font-semibold bg-purple-500/15 text-purple-700 dark:text-purple-400";
-        layerBadge.innerText = "⚙️ Backend";
-      } else {
-        layerBadge.className = "text-xs px-2 py-0.5 rounded-full font-semibold bg-emerald-500/15 text-emerald-700 dark:text-emerald-400";
-        layerBadge.innerText = "🔄 Fullstack (Both)";
-      }
+      const layerEl = document.getElementById("modal-layer");
+      layerEl.innerText = task.layer.toUpperCase();
+      if (task.layer === "frontend") layerEl.className = "text-xs px-2 py-0.5 rounded font-mono font-medium bg-sky-500/10 text-sky-400";
+      else if (task.layer === "backend") layerEl.className = "text-xs px-2 py-0.5 rounded font-mono font-medium bg-purple-500/10 text-purple-400";
+      else layerEl.className = "text-xs px-2 py-0.5 rounded font-mono font-medium bg-emerald-500/10 text-emerald-400";
 
-      const badge = document.getElementById("modal-status-badge");
+      const statusEl = document.getElementById("modal-status");
       if (task.status === "done") {
-        badge.className = "text-xs px-2 py-0.5 rounded-full font-medium bg-emerald-500/10 text-emerald-600";
-        badge.innerText = "Delivered";
+        statusEl.className = "text-xs px-2 py-0.5 rounded font-medium bg-emerald-500/10 text-emerald-400";
+        statusEl.innerText = "Delivered (100%)";
       } else if (task.status === "active") {
-        badge.className = "text-xs px-2 py-0.5 rounded-full font-medium bg-blue-500/10 text-blue-600";
-        badge.innerText = `In Progress (${task.progress}%)`;
+        statusEl.className = "text-xs px-2 py-0.5 rounded font-medium bg-blue-500/10 text-blue-400";
+        statusEl.innerText = `In Progress (${task.progress}%)`;
       } else {
-        badge.className = "text-xs px-2 py-0.5 rounded-full font-medium bg-slate-500/10 text-slate-600";
-        badge.innerText = "Planned";
+        statusEl.className = "text-xs px-2 py-0.5 rounded font-medium bg-slate-500/10 text-slate-400";
+        statusEl.innerText = "Planned";
       }
 
       document.getElementById("task-modal").classList.remove("hidden");
@@ -782,6 +736,14 @@
     function closeModal() {
       document.getElementById("task-modal").classList.add("hidden");
     }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === "task-modal") closeModal();
+    }
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
 
     function toggleTheme() {
       const isDark = document.documentElement.classList.toggle('dark');
@@ -797,9 +759,9 @@
     // Initialize Theme
     const savedTheme = localStorage.getItem('tamdan_roadmap_theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
-    if (initialDark) {
-      document.documentElement.classList.add('dark');
+    const initialDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+    if (!initialDark) {
+      document.documentElement.classList.remove('dark');
     }
     updateThemeIcon(initialDark);
 
